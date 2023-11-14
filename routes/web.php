@@ -21,9 +21,8 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/',[DefaultController::class,'index'])->name('admin.home');
 Route::group(['prefix'=>'blog'],function(){
-    Route::get("",[BlogController::class,"blog"])->name('admin.blog');
-
-    Route::group(['prefix'=>'add'],function(){
+    Route::get("",[BlogController::class,"getAllBlogs"])->name('admin.blog');
+     Route::group(['prefix'=>'add'],function(){
         Route::get("",[BlogController::class,"blogAdd"])->name('admin.blogAdd');
         Route::post("",[BlogController::class,"blogStore"])->name('admin.blogStore');
     });
@@ -31,3 +30,7 @@ Route::group(['prefix'=>'blog'],function(){
     Route::post("update/{blog}",[BlogController::class,"blogUpdate"])->name("admin.blogUpdate");
     Route::get("delete/{blog}",[BlogController::class,"blogDelete"])->name("admin.blogDelete");
 });
+
+Route::get('/blogs', [BlogController::class, 'allBlogs'])->name('allblogs');
+Route::get('/blog/{id}', [BlogController::class, 'show']);
+
